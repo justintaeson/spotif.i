@@ -1,3 +1,3 @@
-# final-project
+# spotif.i
 
-A full stack JavaScript solo project.
+A full stack JavaScript solo project utilizing Spotify's web API.

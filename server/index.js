@@ -39,7 +39,7 @@ app.get('/api/spotify-auth', (req, res, next) => {
 app.get('/api/me', (req, res, next) => {
   fetch('https://api.spotify.com/v1/me', {
     headers: {
-      Authorization: 'Bearer BQB1GKKKuotGFT9pxJCOg6EVoU8sgJupCDut9yzF9Yc4FG11dQslytxqWxHOhIl2DEYLZ2aZmqW5ylCwPV-YUfIJjNLAn-Se1iQ3oEU5aQd-SpjAaNKyAupjGr1Cys8fHNkX4i-xfzgL0sUbXuB2UBaFSNRPkEL6ZBwXnb4y',
+      Authorization: 'Bearer BQAG16GjYsf10m-7NA1TUmsPzQ1l8UHqNha7Tnz22ZGJebSarTbg6DabYW1eH-7Q0qYx3zeepSamo7pGlfFKQRkxHvFJ3yyspzEIkLSEtIqMayRaKIA5GUEpYXpfIX8XKIq8RP7R01GjIazaGIbOtMdtCeQCweoV0PHSAG6U',
       'Content-Type': 'application/json'
     }
   })

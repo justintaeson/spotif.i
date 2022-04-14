@@ -16,7 +16,7 @@ export default class Home extends React.Component {
           email: userInfo.email,
           followers: userInfo.followers.total,
           id: userInfo.id,
-          profilePhoto: userInfo.images.url,
+          profilePhoto: userInfo.images[0].url,
           subscription: userInfo.product
         })
       );
@@ -31,12 +31,12 @@ export default class Home extends React.Component {
         </div>
         <div id="data-container">
           <div className="column-one-half">
-            <img src={this.state.profilePhoto} alt="profile-photo"/>
+            <img id="circle" src={this.state.profilePhoto} alt="profile-photo"/>
             <div id="display-name">{this.state.displayName}</div>
           </div>
           <div className="column-one-half">
             <div className="info-container">
-              <div className="account-info">User ID: {this.state.id}</div>
+              <div>User ID: {this.state.id}</div>
               <div className="account-info">Email: {this.state.email}</div>
               <div className="account-info">Followers: {this.state.followers}</div>
               <div className="account-info">Status: {this.state.subscription}</div>

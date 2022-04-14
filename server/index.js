@@ -13,12 +13,13 @@ app.use(cookieParser());
 const spotifyBasicAuth = process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET;
 const spotifyBasicAuthEncoded = Buffer.from(spotifyBasicAuth).toString('base64');
 
-app.get('/api/spotify-auth', (req, res, next) => { // create a route to handle requests to the /api/spotify-auth
-  const params = new URLSearchParams(); // create a new URLSearchParams object
-  params.set('code', req.query.code); // set the code key to req code which should be
-  params.set('grant_type', 'authorization_code'); // set the grant type to the authorization code
-  params.set('redirect_uri', process.env.REDIRECT_URI); // set the redirect uri to the global environment variable REDIRECT_URI
-  fetch('https://accounts.spotify.com/api/token?' + params, { //
+app.get('/api/spotify-auth', (req, res, next) => {
+  const params = new URLSearchParams();
+  params.set('code', req.query.code);
+  params.set('grant_type', 'authorization_code');
+  params.set('redirect_uri', process.env.REDIRECT_URI);
+  params.set('scope', 'user-read-email user-top-read user-read-private');
+  fetch('https://accounts.spotify.com/api/token?' + params, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -36,8 +37,17 @@ app.get('/api/spotify-auth', (req, res, next) => { // create a route to handle r
 });
 
 app.get('/api/me', (req, res, next) => {
-  res.send('check the server terminal');
-
+  fetch('https://api.spotify.com/v1/me', {
+    headers: {
+      Authorization: 'Bearer BQB1GKKKuotGFT9pxJCOg6EVoU8sgJupCDut9yzF9Yc4FG11dQslytxqWxHOhIl2DEYLZ2aZmqW5ylCwPV-YUfIJjNLAn-Se1iQ3oEU5aQd-SpjAaNKyAupjGr1Cys8fHNkX4i-xfzgL0sUbXuB2UBaFSNRPkEL6ZBwXnb4y',
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => res.json())
+    .then(userInfo => {
+      res.send(userInfo);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);

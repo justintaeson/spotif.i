@@ -1,0 +1,135 @@
+#home-continer {
+  width: 100vw;
+  height: 100vh;
+}
+
+#login-background {
+  position: relative;
+}
+
+#header-container {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  flex-direction: column;
+  height: 20vh;
+}
+
+#header {
+  margin: auto;
+}
+
+#message {
+  margin: auto;
+}
+
+#data-container {
+  display: flex;
+  height: 70vh;
+}
+
+.column-one-half {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.column-one-third {
+  display: flex;
+  width: 33vw;
+  justify-content: center;
+  align-items: center;
+}
+
+#nav-bar {
+  display: flex;
+  height: 10vh;
+}
+
+.account-info {
+  padding-top: 2rem;
+  align-items: center;
+}
+
+#circle {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  border-color: white;
+  border-style: solid;
+  background-image: none;
+  background-size: cover;
+}
+
+#logo {
+  position: absolute;
+  width: 25rem;
+  left: 40%;
+  top: 30%;
+  text-align: center;
+}
+
+#login-button {
+  position: absolute;
+  top: 37%;
+  left: 40%;
+  padding: 1rem 0;
+  margin-left: 5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .home-container {
+    max-width: 900px;
+  }
+
+  #data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .column-one-half {
+    text-align: center;
+  }
+
+  #profile {
+    padding-bottom: 1.5rem;
+  }
+
+  #logo {
+    position: absolute;
+    width: 25rem;
+    left: 10%;
+    top: 30%;
+    text-align: center;
+  }
+
+  #login-button {
+    position: absolute;
+    top: 37%;
+    left: 10%;
+    padding: 1rem 0;
+    margin-left: 5rem;
+  }
+
+  #header-container {
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  #message {
+    font-size: 12px;
+  }
+
+  #user-info {
+    font-size: 12px;
+  }
+
+  .account-info {
+    padding: 1rem 0 0;
+  }
+}

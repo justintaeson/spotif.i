@@ -38,7 +38,29 @@ app.get('/api/spotify-auth', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/me', (req, res, next) => {
+app.get('/api/me', refreshToken, (req, res, next) => {
+  fetch('https://api.spotify.com/v1/me', {
+    headers: {
+      Authorization: 'Bearer ' + req.user.access_token
+    }
+  })
+    .then(res => res.json())
+    .then(userInfo => {
+      res.send({
+        country: userInfo.country,
+        displayName: userInfo.display_name,
+        email: userInfo.email,
+        followers: userInfo.followers.total,
+        id: userInfo.id,
+        profilePhoto: userInfo.images[0].url,
+        subscription: userInfo.product
+      });
+    })
+    .catch(err => next(err));
+}
+);
+
+function refreshToken(req, res, next) {
   const nowInSeconds = Date.now() / 1000;
   const expirationCheck = (nowInSeconds - req.cookies.issuedAt); // how do i access the issuedAt property in the authetnication process above?
   if (expirationCheck > 3600) {
@@ -54,32 +76,20 @@ app.get('/api/me', (req, res, next) => {
     })
       .then(res => res.json())
       .then(newData => {
-        fetch('https://api.spotify.com/v1/me', {
-          headers: {
-            Authorization: 'Bearer ' + newData.access_token,
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(res => res.json())
-          .then(userInfo => {
-            res.send(userInfo);
-          })
-          .catch(err => next(err));
-      });
-  } else {
-    fetch('https://api.spotify.com/v1/me', {
-      headers: {
-        Authorization: 'Bearer ' + req.cookies.access_token,
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(userInfo => {
-        res.send(userInfo);
+        req.user = newData;
+        const nowInSeconds = Date.now() / 1000;
+        res.cookie('access_token', newData.access_token);
+        res.cookie('expires_in', newData.expires_in);
+        res.cookie('refresh_token', newData.refresh_token);
+        res.cookie('issuedAt', nowInSeconds);
+        next();
       })
       .catch(err => next(err));
+  } else {
+    req.user = req.cookies;
+    next();
   }
-});
+}
 
 app.use(errorMiddleware);
 

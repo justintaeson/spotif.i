@@ -3,7 +3,7 @@ import React from 'react';
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { user: null };
   }
 
   componentDidMount() {
@@ -11,37 +11,34 @@ export default class Home extends React.Component {
       .then(res => res.json())
       .then(userInfo => {
         this.setState({
-          country: userInfo.country,
-          displayName: userInfo.display_name,
-          email: userInfo.email,
-          followers: userInfo.followers.total,
-          id: userInfo.id,
-          profilePhoto: userInfo.images[0].url,
-          subscription: userInfo.product
+          user: userInfo
         });
       }
       );
   }
 
   render() {
+    if (this.state.user === null) {
+      return null;
+    }
     return (
       <div id="home-container">
         <div id="header-container">
           <div id="header">PROFILE</div>
-          <div id="message">Hi {this.state.displayName}, here is a quick snapshot of your Spotify account.</div>
+          <div id="message">Hi {this.state.user.displayName}, here is a quick snapshot of your Spotify account.</div>
         </div>
         <div id="data-container">
           <div id="profile" className="column-one-half">
-            <img id="circle" src={this.state.profilePhoto} alt="profile-photo"/>
-            <div id="display-name">{this.state.displayName}</div>
+            <img id="circle" src={this.state.user.profilePhoto} alt="profile-photo"/>
+            <div id="display-name">{this.state.user.displayName}</div>
           </div>
           <div id="user-info" className="column-one-half">
             <div className="info-container">
-              <div>User ID: {this.state.id}</div>
-              <div className="account-info">Email: {this.state.email}</div>
-              <div className="account-info">Followers: {this.state.followers}</div>
-              <div className="account-info">Status: {this.state.subscription}</div>
-              <div className="account-info">Country: {this.state.country}</div>
+              <div>User ID: {this.state.user.id}</div>
+              <div className="account-info">Email: {this.state.user.email}</div>
+              <div className="account-info">Followers: {this.state.user.followers}</div>
+              <div className="account-info">Status: {this.state.user.subscription}</div>
+              <div className="account-info">Country: {this.state.user.country}</div>
             </div>
           </div>
         </div>

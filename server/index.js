@@ -28,26 +28,57 @@ app.get('/api/spotify-auth', (req, res, next) => {
   })
     .then(res => res.json())
     .then(auth => {
+      const nowInSeconds = Date.now() / 1000;
       res.cookie('access_token', auth.access_token);
       res.cookie('expires_in', auth.expires_in);
       res.cookie('refresh_token', auth.refresh_token);
+      res.cookie('issuedAt', nowInSeconds);
       res.redirect('/#');
     })
     .catch(err => next(err));
 });
 
 app.get('/api/me', (req, res, next) => {
-  fetch('https://api.spotify.com/v1/me', {
-    headers: {
-      Authorization: 'Bearer BQAG16GjYsf10m-7NA1TUmsPzQ1l8UHqNha7Tnz22ZGJebSarTbg6DabYW1eH-7Q0qYx3zeepSamo7pGlfFKQRkxHvFJ3yyspzEIkLSEtIqMayRaKIA5GUEpYXpfIX8XKIq8RP7R01GjIazaGIbOtMdtCeQCweoV0PHSAG6U',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => res.json())
-    .then(userInfo => {
-      res.send(userInfo);
+  const nowInSeconds = Date.now() / 1000;
+  const expirationCheck = (nowInSeconds - req.cookies.issuedAt); // how do i access the issuedAt property in the authetnication process above?
+  if (expirationCheck > 3600) {
+    const params = new URLSearchParams();
+    params.set('grant_type', 'refresh_token');
+    params.set('refresh_token', req.cookies.refresh_token); // how do i access the refresh_token that was given above as well?
+    fetch('https://accounts.spotify.com/api/token?' + params, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: 'Basic ' + spotifyBasicAuthEncoded
+      }
     })
-    .catch(err => next(err));
+      .then(res => res.json())
+      .then(newData => {
+        fetch('https://api.spotify.com/v1/me', {
+          headers: {
+            Authorization: 'Bearer ' + newData.access_token,
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(res => res.json())
+          .then(userInfo => {
+            res.send(userInfo);
+          })
+          .catch(err => next(err));
+      });
+  } else {
+    fetch('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: 'Bearer ' + req.cookies.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(userInfo => {
+        res.send(userInfo);
+      })
+      .catch(err => next(err));
+  }
 });
 
 app.use(errorMiddleware);

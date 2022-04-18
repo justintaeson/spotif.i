@@ -9,7 +9,7 @@ export default class Home extends React.Component {
   componentDidMount() {
     fetch('/api/me')
       .then(res => res.json())
-      .then(userInfo =>
+      .then(userInfo => {
         this.setState({
           country: userInfo.country,
           displayName: userInfo.display_name,
@@ -18,7 +18,8 @@ export default class Home extends React.Component {
           id: userInfo.id,
           profilePhoto: userInfo.images[0].url,
           subscription: userInfo.product
-        })
+        });
+      }
       );
   }
 
@@ -30,11 +31,11 @@ export default class Home extends React.Component {
           <div id="message">Hi {this.state.displayName}, here is a quick snapshot of your Spotify account.</div>
         </div>
         <div id="data-container">
-          <div className="column-one-half">
+          <div id="profile" className="column-one-half">
             <img id="circle" src={this.state.profilePhoto} alt="profile-photo"/>
             <div id="display-name">{this.state.displayName}</div>
           </div>
-          <div className="column-one-half">
+          <div id="user-info" className="column-one-half">
             <div className="info-container">
               <div>User ID: {this.state.id}</div>
               <div className="account-info">Email: {this.state.email}</div>

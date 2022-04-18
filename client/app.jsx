@@ -1,6 +1,5 @@
 import React from 'react';
 import Home from './pages/home';
-import Login from './pages/login';
 import Cookie from 'js-cookie';
 
 export default class App extends React.Component {
@@ -12,7 +11,10 @@ export default class App extends React.Component {
   componentDidMount() {
     const accessToken = Cookie.get('access_token');
     if (accessToken === undefined) {
-      window.location.hash = '#login';
+      const newUrl = new URL(window.location.href);
+      newUrl.pathname = '/login.html';
+      window.location = newUrl;
+      return;
     }
     this.setState({
       isAuthorizing: false
@@ -25,9 +27,6 @@ export default class App extends React.Component {
     }
     if (window.location.hash === '') {
       return <Home/>;
-    }
-    if (window.location.hash === '#login') {
-      return <Login />;
     }
 
     return null;

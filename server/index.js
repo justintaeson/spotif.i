@@ -2,13 +2,15 @@ require('dotenv/config');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
+const requireAuth = require('./require-auth');
 const fetch = require('node-fetch');
 const cookieParser = require('cookie-parser');
 
 const app = express();
 
-app.use(staticMiddleware);
 app.use(cookieParser());
+app.use(requireAuth);
+app.use(staticMiddleware);
 
 const spotifyBasicAuth = process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET;
 const spotifyBasicAuthEncoded = Buffer.from(spotifyBasicAuth).toString('base64');

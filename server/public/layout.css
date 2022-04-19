@@ -80,6 +80,10 @@
   margin-left: 5rem;
 }
 
+#time-container {
+  display: flex;
+}
+
 @media screen and (max-width: 768px) {
   .home-container {
     max-width: 900px;

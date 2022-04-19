@@ -1,11 +1,15 @@
 import React from 'react';
 import Home from './pages/home';
+import Tracks from './pages/tracks';
 import Cookie from 'js-cookie';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isAuthorizing: true };
+    this.state = {
+      isAuthorizing: true,
+      clickedOn: null
+    };
   }
 
   componentDidMount() {
@@ -26,7 +30,11 @@ export default class App extends React.Component {
       return null;
     }
     if (window.location.hash === '') {
-      return <Home/>;
+      return <Tracks />;
+    }
+
+    if (this.state.clickedOn === 'tracks-page') {
+      return <Home />;
     }
 
     return null;

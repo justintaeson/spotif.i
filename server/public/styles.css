@@ -1,17 +1,8 @@
-#root {
-  color: white;
-  font-family:
-    "Roboto Mono",
-    monospace;
-}
-
 .home-container {
   background-color: black;
 }
 
 #background-video {
-  background-size: cover;
-  height: 70rem;
   z-index: -1;
   filter: blur(5px);
 }
@@ -45,6 +36,7 @@
   padding: 1rem 5rem;
   cursor: pointer;
   z-index: 5;
+  text-decoration: none;
 }
 
 #logo {

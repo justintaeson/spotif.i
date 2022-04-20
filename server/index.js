@@ -48,6 +48,13 @@ app.get('/api/me', refreshToken, (req, res, next) => {
   })
     .then(res => res.json())
     .then(userInfo => {
+      if (userInfo.error) {
+        res.clearCookie('access_token');
+        res.clearCookie('expires_in');
+        res.clearCookie('refresh_token');
+        res.clearCookie('issuedAt');
+        res.redirect(req.originalUrl);
+      }
       res.send({
         country: userInfo.country,
         displayName: userInfo.display_name,

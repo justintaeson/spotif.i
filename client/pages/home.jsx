@@ -28,11 +28,11 @@ export default class Home extends React.Component {
           <div id="message">Hi {this.state.user.displayName}, here is a quick snapshot of your Spotify account.</div>
         </div>
         <div id="data-container">
-          <div id="profile" className="column-one-half">
+          <div id="profile" className="column-one-half align-center">
             <img id="circle" src={this.state.user.profilePhoto} alt="profile-photo"/>
             <div id="display-name">{this.state.user.displayName}</div>
           </div>
-          <div id="user-info" className="column-one-half">
+          <div id="user-info" className="column-one-half align-center">
             <div className="info-container">
               <div>User ID: {this.state.user.id}</div>
               <div className="account-info">Email: {this.state.user.email}</div>

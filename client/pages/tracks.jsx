@@ -165,17 +165,6 @@ export default class Tracks extends React.Component {
             </div>
           </div>
         </div>
-        <div id="nav-bar">
-          <div className="column-one-third">
-            <i className="fa-solid fa-house icon"></i>
-          </div>
-          <div className="column-one-third">
-            <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
-          </div>
-          <div className="column-one-third">
-            <i className="fa-solid fa-user-group icon"></i>
-          </div>
-        </div>
       </div>
     );
   }

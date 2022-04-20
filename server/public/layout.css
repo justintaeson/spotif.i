@@ -1,3 +1,10 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  margin: 0;
+}
+
 .home-container {
   width: 100vw;
 }
@@ -67,16 +74,15 @@
 #logo {
   position: absolute;
   width: 25rem;
-  left: 40%;
-  top: 30%;
+  left: 38%;
+  top: 42%;
   text-align: center;
 }
 
 #login-button {
   position: absolute;
-  top: 37%;
-  left: 40%;
-  padding: 1rem 0;
+  top: 50%;
+  left: 38%;
   margin-left: 5rem;
 }
 
@@ -151,15 +157,15 @@
   #logo {
     position: absolute;
     width: 25rem;
-    left: 10%;
-    top: 30%;
+    left: 15%;
+    top: 42%;
     text-align: center;
   }
 
   #login-button {
     position: absolute;
-    top: 37%;
-    left: 10%;
+    top: 50%;
+    left: 15%;
     padding: 1rem 0;
     margin-left: 5rem;
   }
@@ -179,5 +185,27 @@
 
   .account-info {
     padding: 1rem 0 0;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
+
+  .padding-left,
+  .padding-right,
+  .padding-top {
+    padding: 0;
+  }
+
+  .column-one-half-row {
+    padding-top: 2rem;
+    height: 180px;
+  }
+
+  .padding-bottom {
+    padding-bottom: 10rem;
   }
 }

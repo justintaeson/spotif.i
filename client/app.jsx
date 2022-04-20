@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './pages/home';
+/* import Home from './pages/home'; */
 import Tracks from './pages/tracks';
 import Cookie from 'js-cookie';
 
@@ -33,8 +33,8 @@ export default class App extends React.Component {
       return <Tracks />;
     }
 
-    if (this.state.clickedOn === 'tracks-page') {
-      return <Home />;
+    if (Tracks.state.clickedOn === true) {
+      return <Tracks />;
     }
 
     return null;

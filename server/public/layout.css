@@ -1,6 +1,5 @@
-#home-continer {
+.home-container {
   width: 100vw;
-  height: 100vh;
 }
 
 #login-background {
@@ -32,9 +31,8 @@
 .column-one-half {
   width: 50%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
 .column-one-third {
@@ -47,6 +45,8 @@
 #nav-bar {
   display: flex;
   height: 10vh;
+  position: fixed;
+  bottom: 0;
 }
 
 .account-info {
@@ -82,6 +82,50 @@
 
 #time-container {
   display: flex;
+}
+
+.track-cover {
+  height: 7rem;
+  width: 7rem;
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.column-one-half-row {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-left {
+  padding-left: 8rem;
+}
+
+.padding-right {
+  padding-right: 8rem;
+}
+
+.padding-top {
+  padding-top: 2rem;
+}
+
+.padding-bottom {
+  padding-bottom: 10rem;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.margin-none {
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {

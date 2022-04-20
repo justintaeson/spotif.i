@@ -5,7 +5,7 @@
     monospace;
 }
 
-#home-container {
+.home-container {
   background-color: black;
 }
 
@@ -65,4 +65,16 @@
   color: #4ecb71;
   border-color: #4ecb71;
   cursor: pointer;
+}
+
+.track-info {
+  font-size: 12px;
+}
+
+.track-name {
+  font-size: 15px;
+}
+
+.track-cover {
+  border: white solid;
 }

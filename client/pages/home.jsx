@@ -22,7 +22,7 @@ export default class Home extends React.Component {
       return null;
     }
     return (
-      <div id="home-container">
+      <div className='home-container'>
         <div id="header-container">
           <div id="header">PROFILE</div>
           <div id="message">Hi {this.state.user.displayName}, here is a quick snapshot of your Spotify account.</div>

@@ -1,3 +1,9 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: "Roboto Mono", monospace;
+}
+
 .home-container {
   background-color: black;
 }

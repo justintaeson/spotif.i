@@ -9,8 +9,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthorizing: true,
-      clickedOn: null
+      isAuthorizing: true
     };
   }
 
@@ -23,8 +22,7 @@ export default class App extends React.Component {
       return;
     }
     this.setState({
-      isAuthorizing: false,
-      clickedOn: null
+      isAuthorizing: false
     });
     window.addEventListener('hashchange', () => {
       this.setState({
@@ -37,36 +35,29 @@ export default class App extends React.Component {
   render() {
     if (this.state.isAuthorizing === true) {
       return null;
-    }
-
-    if (window.location.hash === '#artists-page' || this.state.clickedOn === 'artists-page') {
+    } else if (window.location.hash === '#artists-page') {
       return (
         <>
           <Artists />
           <NavBar></NavBar>
         </>
       );
-    }
-
-    if (window.location.hash === '#tracks-page' || this.state.clickedOn === 'tracks-page') {
+    } else if (window.location.hash === '#tracks-page') {
       return (
         <>
           <Tracks />
           <NavBar />
         </>
       );
-    }
-
-    if (window.location.hash === '' || this.state.clickedOn === 'home-page') {
+    } else if (window.location.hash === '') {
       return (
       <>
         <Home />
         <NavBar />
       </>
       );
+    } else {
+      return null;
     }
-
-    return null;
-
   }
 }

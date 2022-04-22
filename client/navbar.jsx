@@ -6,7 +6,7 @@ export default class NavBar extends React.Component {
     <div id = "nav-bar" >
       <div className="column-one-third">
         <a href="#">
-          <i className="fa-solid fa-house icon">{this.handleClick}</i>
+          <i className="fa-solid fa-house icon"></i>
         </a>
       </div>
       <div className="column-one-third">

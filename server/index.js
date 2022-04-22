@@ -106,7 +106,9 @@ app.get('/api/artistsalltime', refreshToken, (req, res, next) => {
         artistsArray.push({
           id: i,
           artist: topArtists.items[i].name,
-          popularity: topArtists.items[i].popularity
+          popularity: topArtists.items[i].popularity,
+          image: topArtists.items[i].images[0].url,
+          genre: topArtists.items[i].genres[0]
         });
       }
       res.send(artistsArray);

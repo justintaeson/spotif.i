@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/home';
 import Tracks from './pages/tracks';
+import Artists from './pages/artists';
 import Cookie from 'js-cookie';
 
 export default class App extends React.Component {
@@ -14,19 +15,19 @@ export default class App extends React.Component {
   }
 
   handleClick(event) {
-    if (event.target.className === 'fa-solid fa-music icon') {
-      window.location.hash = 'tracks-page';
-      this.setState({
-        isAuthorizing: false,
-        clickedOn: 'tracks-page'
-      });
-    }
-
     if (event.target.className === 'fa-solid fa-user-group icon') {
       window.location.hash = 'artists-page';
       this.setState({
         isAuthorizing: false,
         clickedOn: 'artists-page'
+      });
+    }
+
+    if (event.target.className === 'fa-solid fa-music icon') {
+      window.location.hash = 'tracks-page';
+      this.setState({
+        isAuthorizing: false,
+        clickedOn: 'tracks-page'
       });
     }
 
@@ -57,6 +58,26 @@ export default class App extends React.Component {
     if (this.state.isAuthorizing === true) {
       return null;
     }
+
+    if (window.location.hash === '#artists-page' || this.state.clickedOn === 'artists-page') {
+      return (
+        <>
+          <Artists />
+          <div id="nav-bar">
+            <div className="column-one-third">
+              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
+            </div>
+            <div className="column-one-third">
+              <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
+            </div>
+            <div className="column-one-third">
+              <i className="fa-solid fa-user-group icon" onClick={this.handleClick}></i>
+            </div>
+          </div>
+        </>
+      );
+    }
+
     if (window.location.hash === '#tracks-page' || this.state.clickedOn === 'tracks-page') {
       return (
         <>
@@ -66,29 +87,10 @@ export default class App extends React.Component {
               <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
             </div>
             <div className="column-one-third">
-              <i className="fa-solid fa-music icon"></i>
+              <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
             </div>
             <div className="column-one-third">
-              <i className="fa-solid fa-user-group icon"></i>
-            </div>
-          </div>
-        </>
-      );
-    }
-
-    if (window.location.hash === '#artists-page' || this.state.clickedOn === 'artists-page') {
-      return (
-        <>
-          <Tracks />
-          <div id="nav-bar">
-            <div className="column-one-third">
-              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-music icon"></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-user-group icon"></i>
+              <i className="fa-solid fa-user-group icon" onClick={this.handleClick}></i>
             </div>
           </div>
         </>
@@ -101,13 +103,13 @@ export default class App extends React.Component {
         <Home />
         <div id="nav-bar">
           <div className="column-one-third">
-            <i className="fa-solid fa-house icon"></i>
+              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
           </div>
           <div className="column-one-third">
               <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
           </div>
           <div className="column-one-third">
-            <i className="fa-solid fa-user-group icon"></i>
+              <i className="fa-solid fa-user-group icon" onClick={this.handleClick}></i>
           </div>
         </div>
       </>

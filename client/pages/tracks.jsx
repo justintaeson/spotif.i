@@ -40,9 +40,9 @@ export default class Tracks extends React.Component {
 
     const tracklist = this.state.track.map(index => {
       return (
-        <div key={index.id} className='column-one-half-row'>
+        <div key={index.id} className='column-one-half-row padding-right'>
           <div className='row padding-top'>
-            <div className='column-one-half align-center'>
+            <div className='column-one-half align-baseline'>
               <img className='track-cover' src={index.image} />
             </div>
             <div className='column-one-half'>
@@ -57,7 +57,7 @@ export default class Tracks extends React.Component {
     return (
       <div className='home-container padding-bottom'>
         <div id="header-container">
-          <div id="header">TOP ARTISTS</div>
+          <div id="header">TOP TRACKS</div>
           <div id="message">Hi {Cookies.get('displayName')}, here are your top artists of all time.</div>
         </div>
         <div id="time-container" className='padding-top'>

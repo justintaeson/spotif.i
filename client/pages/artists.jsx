@@ -40,14 +40,14 @@ export default class Artists extends React.Component {
 
     const artistList = this.state.artist.map(index => {
       return (
-        <div key={index.id} className='column-one-half-row'>
+        <div key={index.id} className='column-one-half-row padding-right'>
           <div className='row padding-top'>
-            <div className='column-one-half align-center'>
-              <img className='track-cover' src={index.image} />
+            <div className='column-one-half align-baseline'>
+              <img className='artist-cover' src={index.image} />
             </div>
             <div className='column-one-half'>
-              <p className='track-info track-name margin-none'>{index.track}</p>
-              <p className='track-info'>{index.artist}</p>
+              <p className='track-info track-name'>{index.artist}</p>
+              <p className='track-info'>Genre: {index.genre}</p>
               <p className='track-info'>Popularity: {index.popularity}</p>
             </div>
           </div>

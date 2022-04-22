@@ -76,3 +76,8 @@ body {
 .track-cover {
   border: white solid;
 }
+
+.artist-cover {
+  border: white solid;
+  border-radius: 50%;
+}

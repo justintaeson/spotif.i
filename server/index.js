@@ -41,9 +41,10 @@ app.get('/api/spotify-auth', (req, res, next) => {
 });
 
 app.get('/api/me', refreshToken, (req, res, next) => {
-  fetch('https://api.spotify.com/v1/me', {
+  fetch('https://api.spotify.com/v1/me/', {
     headers: {
-      Authorization: 'Bearer ' + req.user.access_token
+      Authorization: 'Bearer ' + req.user.access_token,
+      'Content-Type': 'application/json'
     }
   })
     .then(res => res.json())
@@ -55,6 +56,7 @@ app.get('/api/me', refreshToken, (req, res, next) => {
         res.clearCookie('issuedAt');
         res.redirect(req.originalUrl);
       }
+      res.cookie('displayName', userInfo.display_name);
       res.send({
         country: userInfo.country,
         displayName: userInfo.display_name,
@@ -77,16 +79,17 @@ app.get('/api/tracksalltime', refreshToken, (req, res, next) => {
   })
     .then(res => res.json())
     .then(topTracks => {
-      const tracks = {};
+      const tracksArray = [];
       for (let i = 0; i < topTracks.items.length; i++) {
-        tracks['key' + i] = {
+        tracksArray.push({
+          id: i,
           artist: topTracks.items[i].artists[0].name,
           track: topTracks.items[i].name,
           image: topTracks.items[i].album.images[0].url,
           popularity: topTracks.items[i].popularity
-        };
+        });
       }
-      res.send(tracks);
+      res.send(tracksArray);
     });
 });
 

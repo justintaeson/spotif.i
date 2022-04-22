@@ -1,34 +1,16 @@
 import React from 'react';
 import Home from './pages/home';
 import Tracks from './pages/tracks';
+import Artists from './pages/artists';
 import Cookie from 'js-cookie';
+import NavBar from './navbar';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthorizing: true,
-      clickedOn: null
+      isAuthorizing: true
     };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    if (event.target.className === 'fa-solid fa-music icon') {
-      window.location.hash = 'tracks-page';
-      this.setState({
-        isAuthorizing: false,
-        clickedOn: 'tracks-page'
-      });
-    }
-
-    if (event.target.className === 'fa-solid fa-house icon') {
-      window.location.hash = '';
-      this.setState({
-        isAuthorizing: false,
-        clickedOn: 'home-page'
-      });
-    }
   }
 
   componentDidMount() {
@@ -40,53 +22,42 @@ export default class App extends React.Component {
       return;
     }
     this.setState({
-      isAuthorizing: false,
-      clickedOn: null
+      isAuthorizing: false
+    });
+    window.addEventListener('hashchange', () => {
+      this.setState({
+        isAuthorizing: false,
+        clickedOn: window.location.hash
+      });
     });
   }
 
   render() {
     if (this.state.isAuthorizing === true) {
       return null;
-    }
-    if (window.location.hash === '#tracks-page' || this.state.clickedOn === 'tracks-page') {
+    } else if (window.location.hash === '#artists-page') {
+      return (
+        <>
+          <Artists />
+          <NavBar></NavBar>
+        </>
+      );
+    } else if (window.location.hash === '#tracks-page') {
       return (
         <>
           <Tracks />
-          <div id="nav-bar">
-            <div className="column-one-third">
-              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-music icon"></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-user-group icon"></i>
-            </div>
-          </div>
+          <NavBar />
         </>
       );
-    }
-    if (window.location.hash === '' || this.state.clickedOn === 'home-page') {
+    } else if (window.location.hash === '') {
       return (
       <>
         <Home />
-        <div id="nav-bar">
-          <div className="column-one-third">
-            <i className="fa-solid fa-house icon"></i>
-          </div>
-          <div className="column-one-third">
-              <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
-          </div>
-          <div className="column-one-third">
-            <i className="fa-solid fa-user-group icon"></i>
-          </div>
-        </div>
+        <NavBar />
       </>
       );
+    } else {
+      return null;
     }
-
-    return null;
-
   }
 }

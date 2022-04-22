@@ -74,13 +74,13 @@
   position: absolute;
   width: 25rem;
   left: 38%;
-  top: 42%;
+  top: 25%;
   text-align: center;
 }
 
 #login-button {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 38%;
   margin-left: 5rem;
 }
@@ -92,6 +92,13 @@
 .track-cover {
   height: 7rem;
   width: 7rem;
+  display: flex;
+  align-items: center;
+}
+
+.artist-cover {
+  height: 8rem;
+  width: 8rem;
   display: flex;
   align-items: center;
 }
@@ -135,6 +142,10 @@
 
 .margin-none {
   margin: 0;
+}
+
+.track-info {
+  padding-left: 2rem;
 }
 
 @media screen and (max-width: 768px) {

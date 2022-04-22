@@ -93,6 +93,28 @@ app.get('/api/tracksalltime', refreshToken, (req, res, next) => {
     });
 });
 
+app.get('/api/artistsalltime', refreshToken, (req, res, next) => {
+  fetch('https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=10', {
+    headers: {
+      Authorization: 'Bearer ' + req.user.access_token
+    }
+  })
+    .then(res => res.json())
+    .then(topArtists => {
+      const artistsArray = [];
+      for (let i = 0; i < topArtists.items.length; i++) {
+        artistsArray.push({
+          id: i,
+          artist: topArtists.items[i].name,
+          popularity: topArtists.items[i].popularity,
+          image: topArtists.items[i].images[0].url,
+          genre: topArtists.items[i].genres[0]
+        });
+      }
+      res.send(artistsArray);
+    });
+});
+
 function refreshToken(req, res, next) {
   const nowInSeconds = Date.now() / 1000;
   const expirationCheck = (nowInSeconds - req.cookies.issuedAt); // how do i access the issuedAt property in the authetnication process above?

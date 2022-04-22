@@ -41,13 +41,22 @@ app.get('/api/spotify-auth', (req, res, next) => {
 });
 
 app.get('/api/me', refreshToken, (req, res, next) => {
-  fetch('https://api.spotify.com/v1/me', {
+  fetch('https://api.spotify.com/v1/me/', {
     headers: {
-      Authorization: 'Bearer ' + req.user.access_token
+      Authorization: 'Bearer ' + req.user.access_token,
+      'Content-Type': 'application/json'
     }
   })
     .then(res => res.json())
     .then(userInfo => {
+      if (userInfo.error) {
+        res.clearCookie('access_token');
+        res.clearCookie('expires_in');
+        res.clearCookie('refresh_token');
+        res.clearCookie('issuedAt');
+        res.redirect(req.originalUrl);
+      }
+      res.cookie('displayName', userInfo.display_name);
       res.send({
         country: userInfo.country,
         displayName: userInfo.display_name,
@@ -61,6 +70,28 @@ app.get('/api/me', refreshToken, (req, res, next) => {
     .catch(err => next(err));
 }
 );
+
+app.get('/api/tracksalltime', refreshToken, (req, res, next) => {
+  fetch('https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10', {
+    headers: {
+      Authorization: 'Bearer ' + req.user.access_token
+    }
+  })
+    .then(res => res.json())
+    .then(topTracks => {
+      const tracksArray = [];
+      for (let i = 0; i < topTracks.items.length; i++) {
+        tracksArray.push({
+          id: i,
+          artist: topTracks.items[i].artists[0].name,
+          track: topTracks.items[i].name,
+          image: topTracks.items[i].album.images[0].url,
+          popularity: topTracks.items[i].popularity
+        });
+      }
+      res.send(tracksArray);
+    });
+});
 
 function refreshToken(req, res, next) {
   const nowInSeconds = Date.now() / 1000;

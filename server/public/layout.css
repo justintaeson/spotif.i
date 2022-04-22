@@ -1,6 +1,5 @@
-#home-continer {
+.home-container {
   width: 100vw;
-  height: 100vh;
 }
 
 #login-background {
@@ -14,6 +13,12 @@
   justify-content: center;
   flex-direction: column;
   height: 20vh;
+}
+
+#tracks-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #header {
@@ -32,9 +37,8 @@
 .column-one-half {
   width: 50%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
 .column-one-third {
@@ -47,6 +51,8 @@
 #nav-bar {
   display: flex;
   height: 10vh;
+  position: fixed;
+  bottom: 0;
 }
 
 .account-info {
@@ -67,17 +73,68 @@
 #logo {
   position: absolute;
   width: 25rem;
-  left: 40%;
-  top: 30%;
+  left: 38%;
+  top: 42%;
   text-align: center;
 }
 
 #login-button {
   position: absolute;
-  top: 37%;
-  left: 40%;
-  padding: 1rem 0;
+  top: 50%;
+  left: 38%;
   margin-left: 5rem;
+}
+
+#time-container {
+  display: flex;
+}
+
+.track-cover {
+  height: 7rem;
+  width: 7rem;
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.column-one-half-row {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-left {
+  padding-left: 8rem;
+}
+
+.padding-right {
+  padding-right: 8rem;
+}
+
+.padding-top {
+  padding-top: 2rem;
+}
+
+.padding-bottom {
+  padding-bottom: 10rem;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-baseline {
+  align-items: flex-end;
+}
+
+.margin-none {
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -103,15 +160,15 @@
   #logo {
     position: absolute;
     width: 25rem;
-    left: 10%;
-    top: 30%;
+    left: 15%;
+    top: 42%;
     text-align: center;
   }
 
   #login-button {
     position: absolute;
-    top: 37%;
-    left: 10%;
+    top: 50%;
+    left: 15%;
     padding: 1rem 0;
     margin-left: 5rem;
   }
@@ -131,5 +188,31 @@
 
   .account-info {
     padding: 1rem 0 0;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    margin: auto;
+  }
+
+  .padding-left,
+  .padding-right,
+  .padding-top {
+    padding: 0;
+  }
+
+  .column-one-half-row {
+    padding-top: 2rem;
+    height: 180px;
+    width: 100%;
+  }
+
+  .padding-bottom {
+    padding-bottom: 10rem;
+  }
+
+  .track-info {
+    text-align: left;
   }
 }

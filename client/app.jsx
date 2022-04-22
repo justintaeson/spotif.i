@@ -22,6 +22,14 @@ export default class App extends React.Component {
       });
     }
 
+    if (event.target.className === 'fa-solid fa-user-group icon') {
+      window.location.hash = 'artists-page';
+      this.setState({
+        isAuthorizing: false,
+        clickedOn: 'artists-page'
+      });
+    }
+
     if (event.target.className === 'fa-solid fa-house icon') {
       window.location.hash = '';
       this.setState({
@@ -67,6 +75,26 @@ export default class App extends React.Component {
         </>
       );
     }
+
+    if (window.location.hash === '#artists-page' || this.state.clickedOn === 'artists-page') {
+      return (
+        <>
+          <Tracks />
+          <div id="nav-bar">
+            <div className="column-one-third">
+              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
+            </div>
+            <div className="column-one-third">
+              <i className="fa-solid fa-music icon"></i>
+            </div>
+            <div className="column-one-third">
+              <i className="fa-solid fa-user-group icon"></i>
+            </div>
+          </div>
+        </>
+      );
+    }
+
     if (window.location.hash === '' || this.state.clickedOn === 'home-page') {
       return (
       <>

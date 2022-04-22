@@ -3,6 +3,7 @@ import Home from './pages/home';
 import Tracks from './pages/tracks';
 import Artists from './pages/artists';
 import Cookie from 'js-cookie';
+import NavBar from './navbar';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,33 +12,6 @@ export default class App extends React.Component {
       isAuthorizing: true,
       clickedOn: null
     };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    if (event.target.className === 'fa-solid fa-user-group icon') {
-      window.location.hash = 'artists-page';
-      this.setState({
-        isAuthorizing: false,
-        clickedOn: 'artists-page'
-      });
-    }
-
-    if (event.target.className === 'fa-solid fa-music icon') {
-      window.location.hash = 'tracks-page';
-      this.setState({
-        isAuthorizing: false,
-        clickedOn: 'tracks-page'
-      });
-    }
-
-    if (event.target.className === 'fa-solid fa-house icon') {
-      window.location.hash = '';
-      this.setState({
-        isAuthorizing: false,
-        clickedOn: 'home-page'
-      });
-    }
   }
 
   componentDidMount() {
@@ -52,6 +26,12 @@ export default class App extends React.Component {
       isAuthorizing: false,
       clickedOn: null
     });
+    window.addEventListener('hashchange', () => {
+      this.setState({
+        isAuthorizing: false,
+        clickedOn: window.location.hash
+      });
+    });
   }
 
   render() {
@@ -63,17 +43,7 @@ export default class App extends React.Component {
       return (
         <>
           <Artists />
-          <div id="nav-bar">
-            <div className="column-one-third">
-              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-user-group icon" onClick={this.handleClick}></i>
-            </div>
-          </div>
+          <NavBar></NavBar>
         </>
       );
     }
@@ -82,17 +52,7 @@ export default class App extends React.Component {
       return (
         <>
           <Tracks />
-          <div id="nav-bar">
-            <div className="column-one-third">
-              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
-            </div>
-            <div className="column-one-third">
-              <i className="fa-solid fa-user-group icon" onClick={this.handleClick}></i>
-            </div>
-          </div>
+          <NavBar />
         </>
       );
     }
@@ -101,17 +61,7 @@ export default class App extends React.Component {
       return (
       <>
         <Home />
-        <div id="nav-bar">
-          <div className="column-one-third">
-              <i className="fa-solid fa-house icon" onClick={this.handleClick}></i>
-          </div>
-          <div className="column-one-third">
-              <i className="fa-solid fa-music icon" onClick={this.handleClick}></i>
-          </div>
-          <div className="column-one-third">
-              <i className="fa-solid fa-user-group icon" onClick={this.handleClick}></i>
-          </div>
-        </div>
+        <NavBar />
       </>
       );
     }

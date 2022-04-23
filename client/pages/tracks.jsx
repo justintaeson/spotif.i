@@ -5,19 +5,39 @@ export default class Tracks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayName: null,
-      timeRange: null,
-      clickedOn: null
+      timeRange: 'all-time'
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
-    this.setState({
-      displayName: null,
-      timeRange: null,
-      clickedOn: true
-    });
+    if (event.target.id === 'six-months') {
+      const allTimeFilter = document.querySelector('#all-time');
+      const sixMonthsFilter = document.querySelector('#six-months');
+      allTimeFilter.className = 'time-range';
+      sixMonthsFilter.className = 'time-range green';
+      fetch('/api/tracks6months')
+        .then(res => res.json())
+        .then(userInfo => {
+          this.setState({
+            timeRange: '6 months',
+            track: userInfo
+          });
+        });
+    } else {
+      const allTimeFilter = document.querySelector('#all-time');
+      const sixMonthsFilter = document.querySelector('#six-months');
+      allTimeFilter.className = 'time-range green';
+      sixMonthsFilter.className = 'time-range';
+      fetch('/api/tracksalltime')
+        .then(res => res.json())
+        .then(userInfo => {
+          this.setState({
+            timeRange: 'all-time',
+            track: userInfo
+          });
+        });
+    }
   }
 
   componentDidMount() {
@@ -25,9 +45,7 @@ export default class Tracks extends React.Component {
       .then(res => res.json())
       .then(userInfo => {
         this.setState({
-          displayName: null,
-          timeRange: null,
-          clickedOn: null,
+          timeRange: 'all-time',
           track: userInfo
         });
       });
@@ -37,7 +55,6 @@ export default class Tracks extends React.Component {
     if (this.state.track === undefined) {
       return null;
     }
-
     const tracklist = this.state.track.map(index => {
       return (
         <div key={index.id} className='column-one-half-row padding-right'>
@@ -58,17 +75,17 @@ export default class Tracks extends React.Component {
       <div className='home-container padding-bottom'>
         <div id="header-container">
           <div id="header">TOP TRACKS</div>
-          <div id="message">Hi {Cookies.get('displayName')}, here are your top artists of all time.</div>
+          <div id="message">Hi {Cookies.get('displayName')}, here are your top tracks of {this.state.timeRange}.</div>
         </div>
         <div id="time-container" className='padding-top'>
           <div className='column-one-third padding-left'>
-            <div className="time-range"> All Time </div>
+            <div id="all-time" className="time-range green" onClick={this.handleClick}>All-Time</div>
           </div>
           <div className='column-one-third'>
-            <div className="time-range"> 6 Months </div>
+            <div id="six-months" className="time-range" onClick={this.handleClick}>6 Months</div>
           </div>
           <div className='column-one-third padding-right'>
-            <div className="time-range"> 1 Month </div>
+            <div id="one-month" className="time-range" onClick={this.handleClick}>1 Month </div>
           </div>
         </div>
         <div id="tracks-container">{tracklist}

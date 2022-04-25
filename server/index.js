@@ -50,22 +50,19 @@ app.get('/api/me', refreshToken, (req, res, next) => {
     .then(res => res.json())
     .then(userInfo => {
       if (userInfo.error) {
-        res.clearCookie('access_token');
-        res.clearCookie('expires_in');
-        res.clearCookie('refresh_token');
-        res.clearCookie('issuedAt');
-        res.redirect(req.originalUrl);
+        refreshToken();
+      } else {
+        res.cookie('displayName', userInfo.display_name);
+        res.send({
+          country: userInfo.country,
+          displayName: userInfo.display_name,
+          email: userInfo.email,
+          followers: userInfo.followers.total,
+          id: userInfo.id,
+          profilePhoto: userInfo.images[0].url,
+          subscription: userInfo.product
+        });
       }
-      res.cookie('displayName', userInfo.display_name);
-      res.send({
-        country: userInfo.country,
-        displayName: userInfo.display_name,
-        email: userInfo.email,
-        followers: userInfo.followers.total,
-        id: userInfo.id,
-        profilePhoto: userInfo.images[0].url,
-        subscription: userInfo.product
-      });
     })
     .catch(err => next(err));
 }
@@ -161,11 +158,11 @@ app.get('/api/artists6months', refreshToken, (req, res, next) => {
 
 function refreshToken(req, res, next) {
   const nowInSeconds = Date.now() / 1000;
-  const expirationCheck = (nowInSeconds - req.cookies.issuedAt); // how do i access the issuedAt property in the authetnication process above?
+  const expirationCheck = (nowInSeconds - req.cookies.issuedAt);
   if (expirationCheck > 3600) {
     const params = new URLSearchParams();
     params.set('grant_type', 'refresh_token');
-    params.set('refresh_token', req.cookies.refresh_token); // how do i access the refresh_token that was given above as well?
+    params.set('refresh_token', req.cookies.refresh_token);
     fetch('https://accounts.spotify.com/api/token?' + params, {
       method: 'POST',
       headers: {
@@ -175,6 +172,14 @@ function refreshToken(req, res, next) {
     })
       .then(res => res.json())
       .then(newData => {
+        if (newData.access_token === undefined) {
+          res.clearCookie('access_token');
+          res.clearCookie('expires_in');
+          res.clearCookie('refresh_token');
+          res.clearCookie('issuedAt');
+          res.redirect('/#');
+          next();
+        }
         req.user = newData;
         const nowInSeconds = Date.now() / 1000;
         res.cookie('access_token', newData.access_token);

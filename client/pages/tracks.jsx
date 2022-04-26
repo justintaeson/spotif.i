@@ -12,10 +12,6 @@ export default class Tracks extends React.Component {
 
   handleClick(event) {
     if (event.target.id === 'six-months') {
-      const allTimeFilter = document.querySelector('#all-time');
-      const sixMonthsFilter = document.querySelector('#six-months');
-      allTimeFilter.className = 'time-range';
-      sixMonthsFilter.className = 'time-range green';
       fetch('/api/tracks6months')
         .then(res => res.json())
         .then(userInfo => {
@@ -25,10 +21,6 @@ export default class Tracks extends React.Component {
           });
         });
     } else {
-      const allTimeFilter = document.querySelector('#all-time');
-      const sixMonthsFilter = document.querySelector('#six-months');
-      allTimeFilter.className = 'time-range green';
-      sixMonthsFilter.className = 'time-range';
       fetch('/api/tracksalltime')
         .then(res => res.json())
         .then(userInfo => {
@@ -71,12 +63,36 @@ export default class Tracks extends React.Component {
         </div>
       );
     });
+
+    const header = (
+      <div id="header-container">
+        <div id="header">TOP TRACKS</div>
+        <div id="message">Hi {Cookies.get('displayName')}, here are your top tracks of {this.state.timeRange}.</div>
+      </div>);
+
+    if (this.state.timeRange === '6 months') {
+      return (
+        <div className='home-container padding-bottom'>
+          {header}
+          <div id="time-container" className='padding-top'>
+            <div className='column-one-third padding-left'>
+              <div id="all-time" className="time-range" onClick={this.handleClick}>All-Time</div>
+            </div>
+            <div className='column-one-third'>
+              <div id="six-months" className="time-range green" onClick={this.handleClick}>6 Months</div>
+            </div>
+            <div className='column-one-third padding-right'>
+              <div id="one-month" className="time-range" onClick={this.handleClick}>1 Month </div>
+            </div>
+          </div>
+          <div id="tracks-container">{tracklist}
+          </div>
+        </div>
+      );
+    }
     return (
       <div className='home-container padding-bottom'>
-        <div id="header-container">
-          <div id="header">TOP TRACKS</div>
-          <div id="message">Hi {Cookies.get('displayName')}, here are your top tracks of {this.state.timeRange}.</div>
-        </div>
+        {header}
         <div id="time-container" className='padding-top'>
           <div className='column-one-third padding-left'>
             <div id="all-time" className="time-range green" onClick={this.handleClick}>All-Time</div>

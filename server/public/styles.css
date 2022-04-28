@@ -81,3 +81,8 @@ body {
   border: white solid;
   border-radius: 50%;
 }
+
+.green {
+  color: #4ecb71;
+  border-color: #4ecb71;
+}

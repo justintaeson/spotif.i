@@ -34,23 +34,12 @@ export default class Home extends React.Component {
           </div>
           <div id="user-info" className="column-one-half align-center">
             <div className="info-container">
-              <div>User ID: {this.state.user.id}</div>
+              <div>User ID: {this.state.user.displayName}</div>
               <div className="account-info">Email: {this.state.user.email}</div>
               <div className="account-info">Followers: {this.state.user.followers}</div>
               <div className="account-info">Status: {this.state.user.subscription}</div>
               <div className="account-info">Country: {this.state.user.country}</div>
             </div>
-          </div>
-        </div>
-        <div id="nav-bar">
-          <div className="column-one-third">
-            <i className="fa-solid fa-house icon"></i>
-          </div>
-          <div className="column-one-third">
-            <i className="fa-solid fa-music icon"></i>
-          </div>
-          <div className="column-one-third">
-            <i className="fa-solid fa-user-group icon"></i>
           </div>
         </div>
       </div>

@@ -1,14 +1,19 @@
 require('dotenv/config');
 const path = require('path');
+const webpack = require('webpack');
 
 const clientPath = path.join(__dirname, 'client');
 const serverPublicPath = path.join(__dirname, 'server/public');
 
 module.exports = {
+  context: clientPath,
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  entry: clientPath,
+  entry: {
+    main: './index.jsx',
+    login: './login.js'
+  },
   output: {
     path: serverPublicPath
   },
@@ -42,8 +47,8 @@ module.exports = {
       '/': `http://localhost:${process.env.PORT}`
     }
   },
-  stats: 'summary',
   performance: {
     hints: false
-  }
+  },
+  plugins: [new webpack.EnvironmentPlugin(['CLIENT_ID', 'REDIRECT_URI'])]
 };

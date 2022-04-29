@@ -12,10 +12,6 @@ export default class Artists extends React.Component {
 
   handleClick(event) {
     if (event.target.id === 'six-months') {
-      const allTimeFilter = document.querySelector('#all-time');
-      const sixMonthsFilter = document.querySelector('#six-months');
-      allTimeFilter.className = 'time-range';
-      sixMonthsFilter.className = 'time-range green';
       fetch('/api/artists6months')
         .then(res => res.json())
         .then(userInfo => {
@@ -24,11 +20,16 @@ export default class Artists extends React.Component {
             artist: userInfo
           });
         });
+    } else if (event.target.id === 'one-month') {
+      fetch('/api/artists1month')
+        .then(res => res.json())
+        .then(userInfo => {
+          this.setState({
+            timeRange: '1 month',
+            artist: userInfo
+          });
+        });
     } else {
-      const allTimeFilter = document.querySelector('#all-time');
-      const sixMonthsFilter = document.querySelector('#six-months');
-      allTimeFilter.className = 'time-range green';
-      sixMonthsFilter.className = 'time-range';
       fetch('/api/artistsalltime')
         .then(res => res.json())
         .then(userInfo => {
@@ -73,12 +74,54 @@ export default class Artists extends React.Component {
       );
     });
 
+    const header = (
+      <div id="header-container">
+        <div id="header">TOP ARTISTS</div>
+        <div id="message">Hi {Cookies.get('displayName')}, here are your top artists of {this.state.timeRange}.</div>
+      </div>);
+
+    if (this.state.timeRange === '6 months') {
+      return (
+        <div className='home-container padding-bottom'>
+          {header}
+          <div id="time-container" className='padding-top'>
+            <div className='column-one-third padding-left'>
+              <div id="all-time" className="time-range" onClick={this.handleClick}>All-Time</div>
+            </div>
+            <div className='column-one-third'>
+              <div id="six-months" className="time-range green" onClick={this.handleClick}>6 Months</div>
+            </div>
+            <div className='column-one-third padding-right'>
+              <div id="one-month" className="time-range" onClick={this.handleClick}>1 Month </div>
+            </div>
+          </div>
+          <div id="tracks-container">{artistList}
+          </div>
+        </div>
+      );
+    } else if (this.state.timeRange === '1 month') {
+      return (
+        <div className='home-container padding-bottom'>
+          {header}
+          <div id="time-container" className='padding-top'>
+            <div className='column-one-third padding-left'>
+              <div id="all-time" className="time-range" onClick={this.handleClick}>All-Time</div>
+            </div>
+            <div className='column-one-third'>
+              <div id="six-months" className="time-range" onClick={this.handleClick}>6 Months</div>
+            </div>
+            <div className='column-one-third padding-right'>
+              <div id="one-month" className="time-range green" onClick={this.handleClick}>1 Month </div>
+            </div>
+          </div>
+          <div id="tracks-container">{artistList}
+          </div>
+        </div>
+      );
+    }
     return (
       <div className='home-container padding-bottom'>
-        <div id="header-container">
-          <div id="header">TOP TRACKS</div>
-          <div id="message">Hi {Cookies.get('displayName')}, here are your top artists of {this.state.timeRange}.</div>
-        </div>
+        {header}
         <div id="time-container" className='padding-top'>
           <div className='column-one-third padding-left'>
             <div id="all-time" className="time-range green" onClick={this.handleClick}>All-Time</div>

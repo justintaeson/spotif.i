@@ -67,7 +67,7 @@ export default class Tracks extends React.Component {
               <img className='track-cover' src={index.image} />
             </div>
             <div className='column-one-half'>
-              <a href={trackURL} className='track-info track-name margin-none'>{index.track}</a>
+              <a target="_blank" href={trackURL} className='track-info track-name margin-none' rel="noreferrer">{index.track}</a>
               <p className='track-info'>{index.artist}</p>
               <p className='track-info'>Popularity: {index.popularity}</p>
             </div>

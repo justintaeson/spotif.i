@@ -67,7 +67,7 @@ export default class Artists extends React.Component {
               <img className='artist-cover' src={index.image} />
             </div>
             <div className='column-one-half'>
-              <a href={artistURL} className='track-info track-name'>{index.artist}</a>
+              <a target="_blank" href={artistURL} className='track-info track-name' rel="noreferrer">{index.artist}</a>
               <p className='track-info'>Genre: {index.genre}</p>
               <p className='track-info'>Popularity: {index.popularity}</p>
             </div>

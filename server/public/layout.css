@@ -4,6 +4,9 @@
 
 #login-background {
   position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 }
 
 #header-container {
@@ -73,7 +76,7 @@
 #logo {
   position: absolute;
   width: 25rem;
-  left: 38%;
+  left: 45%;
   top: 25%;
   text-align: center;
 }
@@ -81,7 +84,7 @@
 #login-button {
   position: absolute;
   top: 35%;
-  left: 38%;
+  left: 45%;
   margin-left: 5rem;
 }
 

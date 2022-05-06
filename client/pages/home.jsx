@@ -1,4 +1,5 @@
 import React from 'react';
+import SpotifyLogo from '../../server/public/assets/spotify.png';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class Home extends React.Component {
     return (
       <div className='home-container'>
         <div id="header-container">
+          <img id="spotify-logo" src={SpotifyLogo} alt="Spotify" />
           <div id="header">PROFILE</div>
           <div id="message">Hi {this.state.user.displayName}, here is a quick snapshot of your Spotify account.</div>
         </div>

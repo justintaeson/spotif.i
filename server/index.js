@@ -83,7 +83,8 @@ app.get('/api/tracksalltime', refreshToken, (req, res, next) => {
           artist: topTracks.items[i].artists[0].name,
           track: topTracks.items[i].name,
           image: topTracks.items[i].album.images[0].url,
-          popularity: topTracks.items[i].popularity
+          popularity: topTracks.items[i].popularity,
+          trackId: topTracks.items[i].id
         });
       }
       res.send(tracksArray);
@@ -105,7 +106,8 @@ app.get('/api/tracks6months', refreshToken, (req, res, next) => {
           artist: topTracks.items[i].artists[0].name,
           track: topTracks.items[i].name,
           image: topTracks.items[i].album.images[0].url,
-          popularity: topTracks.items[i].popularity
+          popularity: topTracks.items[i].popularity,
+          trackId: topTracks.items[i].id
         });
       }
       res.send(tracksArray);
@@ -127,7 +129,8 @@ app.get('/api/tracks1month', refreshToken, (req, res, next) => {
           artist: topTracks.items[i].artists[0].name,
           track: topTracks.items[i].name,
           image: topTracks.items[i].album.images[0].url,
-          popularity: topTracks.items[i].popularity
+          popularity: topTracks.items[i].popularity,
+          trackId: topTracks.items[i].id
         });
       }
       res.send(tracksArray);
@@ -149,7 +152,8 @@ app.get('/api/artistsalltime', refreshToken, (req, res, next) => {
           artist: topArtists.items[i].name,
           popularity: topArtists.items[i].popularity,
           image: topArtists.items[i].images[0].url,
-          genre: topArtists.items[i].genres[0]
+          genre: topArtists.items[i].genres[0],
+          artistId: topArtists.items[i].id
         });
       }
       res.send(artistsArray);
@@ -171,7 +175,8 @@ app.get('/api/artists6months', refreshToken, (req, res, next) => {
           artist: topArtists.items[i].name,
           popularity: topArtists.items[i].popularity,
           image: topArtists.items[i].images[0].url,
-          genre: topArtists.items[i].genres[0]
+          genre: topArtists.items[i].genres[0],
+          artistId: topArtists.items[i].id
         });
       }
       res.send(artistsArray);
@@ -193,7 +198,8 @@ app.get('/api/artists1month', refreshToken, (req, res, next) => {
           artist: topArtists.items[i].name,
           popularity: topArtists.items[i].popularity,
           image: topArtists.items[i].images[0].url,
-          genre: topArtists.items[i].genres[0]
+          genre: topArtists.items[i].genres[0],
+          artistId: topArtists.items[i].id
         });
       }
       res.send(artistsArray);

@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookies from 'js-cookie';
+import SpotifyLogo from '../../server/public/assets/spotify.png';
 
 export default class Artists extends React.Component {
   constructor(props) {
@@ -58,6 +59,7 @@ export default class Artists extends React.Component {
     }
 
     const artistList = this.state.artist.map(index => {
+      const artistURL = 'https://open.spotify.com/artist/' + index.artistId;
       return (
         <div key={index.id} className='column-one-half-row padding-right'>
           <div className='row padding-top'>
@@ -65,7 +67,7 @@ export default class Artists extends React.Component {
               <img className='artist-cover' src={index.image} />
             </div>
             <div className='column-one-half'>
-              <p className='track-info track-name'>{index.artist}</p>
+              <a href={artistURL} className='track-info track-name'>{index.artist}</a>
               <p className='track-info'>Genre: {index.genre}</p>
               <p className='track-info'>Popularity: {index.popularity}</p>
             </div>
@@ -76,6 +78,7 @@ export default class Artists extends React.Component {
 
     const header = (
       <div id="header-container">
+        <img id="spotify-logo" src={SpotifyLogo} alt="Spotify" />
         <div id="header">TOP ARTISTS</div>
         <div id="message">Hi {Cookies.get('displayName')}, here are your top artists of {this.state.timeRange}.</div>
       </div>);

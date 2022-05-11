@@ -49,40 +49,38 @@ You can check out the application at https://visualifyapp.herokuapp.com/
 
 ## Getting Started
 
-1. Clone repository.
+1. **Clone repository.**
 
    ```git clone git@github.com:justintaeson/ajax-project.git```
 
-2. Install dependencies.
+2. **Install dependencies.**
 
    ```npm install```
 
-3. Create a copy of the .env.example file.
+3. **Create a copy of the .env.example file.**
 
     ```cp .env.example .env```
 
-4. Create an app on Spotify's developer dashboard.
+4. **Create an app on Spotify's developer dashboard.**
 
-    ```https://developer.spotify.com/dashboard/applications```
+    https://developer.spotify.com/dashboard/applications
 
-5. Input the client ID & client given by Spotify for you app into the .env file.
+5. **Input the client ID & client given by Spotify for you app into the .env file.**
 
-    ```
-      CLIENT_ID=bcaf96c9c8a246dbb00a2348debeb62c
-      CLIENT_SECRET=a51cbec077d9441f852fb65eb7011098
-    ```
+    - CLIENT_ID=bcaf96c9c8a246dbb00a2348debeb62c
+    - CLIENT_SECRET=a51cbec077d9441f852fb65eb7011098
 
-6. Run the application. Once live, you can view the application at http://localhost:3000 in your browser.
+6. **Run the application. Once live, you can view the application at http://localhost:3000 in your browser.**
 
     ```npm run dev```
 
-7. Login with the following demo account if you'd like to see how the app functions.
+7. **Login with the following demo account if you'd like to see how the app functions.**
 
-- EMAIL: mrjustinson@gmail.com
-- PW: Demo1234@
+    - EMAIL: mrjustinson@gmail.com
+    - PW: Demo1234@
 
-8. If you'd like to use your personal Spotify account with this application, send me a quick message on LinkedIn with your Spotify email address.
+8. **If you'd like to use your personal Spotify account with this application, please send me a message on LinkedIn with your Spotify email address.**
 
-- The web application is currently being reviewed by Spotify at the moment.
-- Once it's given approval, any Spotify users will be able to use their own personal Spotify account with Visualify.
-- Until given approval, application access has to be given to users who want to use Visualify due to Spotify's policy.
+    - https://www.linkedin.com/in/justinson/
+
+The web application is currently being reviewed by Spotify at the moment. Once it's given approval, any Spotify users will be able to use their own personal Spotify account with Visualify. Until given approval, application access has to be given to users individually due to Spotify's policy.

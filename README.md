@@ -51,7 +51,7 @@ You can check out the application at https://visualifyapp.herokuapp.com/
 
 1. **Clone repository.**
 
-   ```git clone git@github.com:justintaeson/ajax-project.git```
+   ```git clone git@github.com:justintaeson/visualify.git```
 
 2. **Install dependencies.**
 

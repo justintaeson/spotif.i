@@ -6,7 +6,7 @@ Visualify was inspired by Spotify Wrapped, a feature that shows Spotify users th
 
 ## Live Demo
 
-You can check out the application at https://visualifyapp.herokuapp.com/
+The application is currently WIP as I'm waiting for approval from Spotfiy. The application needs to meet certain requirements before it's allowed to be used by the public.
 
 ## Technologies Used
 
